@@ -1,41 +1,34 @@
 const { MongoClient } = require("mongodb");
 const url = "mongodb://127.0.0.1:27017";
-const dbName = "college";   
 const client = new MongoClient(url);
 async function run() {
   try {
     await client.connect();
-    console.log("Connected to MongoDB");
-
-    const db = client.db(dbName);
+    console.log("Connected successfully to MongoDB");
+    const db = client.db("myDatabase");
     const collection = db.collection("students");
-    await collection.insertOne({
-      name: "Prasanth",
-      age: 21,
-      course: "Computer Science"
-    });
     await collection.insertMany([
-      { name: "Kumar", age: 22, course: "IT" },
-      { name: "Ravi", age: 20, course: "Electronics" }
+      { name: "Prasanth", age: 22, grade: "A" },
+      { name: "Kumar", age: 24, grade: "B" },
+      { name: "Ravi", age: 21, grade: "A" },
+      { name: "Anita", age: 23, grade: "C" },
+      { name: "Divya", age: 22, grade: "B" }
     ]);
-    console.log("Documents inserted");
+    console.log("Sample records inserted!");
     const allStudents = await collection.find().toArray();
     console.log("All Students:", allStudents);
-    const csStudents = await collection.find({ course: "Computer Science" }).toArray();
-    console.log("CS Students:", csStudents);
-    await collection.updateOne(
-      { name: "Prasanth" },
-      { $set: { course: "Data Science" } }
-    );
-    console.log("Updated Prasanth's course");
-    await collection.updateMany({}, { $inc: { age: 1 } });
-    console.log("Increased age for all students");
-    await collection.deleteOne({ name: "Ravi" });
-    console.log(" Removed Ravi");
-    await collection.deleteMany({ course: "IT" });
-    console.log("Removed all IT students");
+    const limitedStudents = await collection.find().limit(3).toArray();
+    console.log("First 3 Students:", limitedStudents);
+    const sortedStudents = await collection.find().sort({ age: 1 }).toArray();
+    console.log("Students sorted by age (asc):", sortedStudents);
+    await collection.createIndex({ name: 1 });
+    console.log("Index created on 'name' field");
+    const gradeSummary = await collection.aggregate([
+      { $group: { _id: "$grade", count: { $sum: 1 } } }
+    ]).toArray();
+    console.log("Grade Summary:", gradeSummary);
   } catch (err) {
-    console.error(err);
+    console.error("Error:", err);
   } finally {
     await client.close();
   }
