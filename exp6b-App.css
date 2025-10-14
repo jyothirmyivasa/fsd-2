@@ -1,0 +1,31 @@
+.app-container {
+  text-align: center;
+  background-color: #f9f9f9;
+  padding: 40px;
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  color: #333;
+  font-size: 32px;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+}
+
+.employee-table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+.employee-table th,
+.employee-table td {
+  border: 1px solid #ccc;
+  padding: 12px;
+  text-align: center;
+}
+
+.employee-table th {
+  background-color: #007bff;
+  color: white;
+}
