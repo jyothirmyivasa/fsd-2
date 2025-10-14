@@ -1,0 +1,28 @@
+$primary-color: #007bff;
+$row-hover: #e9f2ff;
+$btn-color: #4caf50;
+
+.employee-table {
+  tr {
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: $row-hover;
+    }
+  }
+}
+
+.btn {
+  background-color: $btn-color;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-top: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($btn-color, 10%);
+  }
+}
