@@ -1,0 +1,23 @@
+const express = require("express");
+const app = express();
+
+app.use(express.urlencoded({ extended: true }));
+
+app.post("/login", (req, res) => {
+  const { user, pass } = req.body;
+  user === "jyothi" && pass === "1234"
+    ? res.send("Login Success")
+    : res.send("Invalid Login");
+});
+
+app.get("/", (req, res) => {
+  res.send(`
+    <form method="POST" action="/login">
+      <input name="user" placeholder="User">
+      <input name="pass" type="password" placeholder="Pass">
+      <button>Login</button>
+    </form>
+  `);
+});
+
+app.listen(3000, () => console.log("http://localhost:3000"));
