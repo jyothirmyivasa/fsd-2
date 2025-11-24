@@ -1,0 +1,31 @@
+import React from "react";
+
+export default function App() {
+  const fruits = ["Apple", "Mango", "Banana", "Orange"];
+  const students = [
+    { id: 1, name: "Likki", marks: 95 },
+    { id: 2, name: "Joe", marks: 88 }
+  ];
+
+  return (
+    <div>
+      <h2>Rendering Lists</h2>
+
+      <h3>Fruit List:</h3>
+      <ul>
+        {fruits.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+
+      <h3>Student Details:</h3>
+      <ul>
+        {students.map((s) => (
+          <li key={s.id}>
+            {s.name} — {s.marks} Marks
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
