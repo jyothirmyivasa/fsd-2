@@ -1,0 +1,17 @@
+const express = require('express');
+const app = express();
+
+// Middleware function
+app.use((req, res, next) => {
+  console.log("Middleware executed");
+  req.msg = "Hello from Middleware";
+  next(); // pass control to next handler
+});
+
+app.get('/', (req, res) => {
+  res.send("Home Route → " + req.msg);
+});
+
+app.listen(3000, () => {
+  console.log("Server running at: http://localhost:3000/");
+});
