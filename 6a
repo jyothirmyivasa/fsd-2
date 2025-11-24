@@ -1,0 +1,40 @@
+const express = require("express");
+const app = express();
+
+app.use(express.json());
+
+let users = [];
+
+app.post("/users", (req, res) => {
+  users.push(req.body);
+  res.send("User added");
+});
+
+
+app.get("/users", (req, res) => {
+  res.json(users);
+});
+
+
+app.put("/users/:id", (req, res) => {
+  const id = req.params.id;
+  const index = users.findIndex(u => u.id == id);
+
+  if (index === -1) {
+    return res.send("User not found");
+  }
+
+  users[index] = { ...users[index], ...req.body };
+  res.send("User updated");
+});
+
+
+app.delete("/users/:id", (req, res) => {
+  const id = req.params.id;
+  users = users.filter(u => u.id != id);
+  res.send("User deleted");
+});
+
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
+});
