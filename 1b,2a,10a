@@ -1,0 +1,46 @@
+import React, { Component, useState } from "react";
+
+function FunctionChild(props) {
+  return (
+    <div>
+      <h3>Functional Child Component</h3>
+      <p>Message from Parent (Props): {props.msg}</p>
+    </div>
+  );
+}
+
+class ClassChild extends Component {
+  render() {
+    return (
+      <div>
+        <h3>Class Child Component</h3>
+        <p>Received from Props: {this.props.info}</p>
+      </div>
+    );
+  }
+}
+
+function Parent() {
+  const [message, setMessage] = useState("Hello from State!");
+  const data = "Hello from Parent via Props!";
+
+  return (
+    <div>
+      <h2>Parent Component</h2>
+      <FunctionChild msg={data} />
+      <ClassChild info={message} />
+      <button onClick={() => setMessage("State Updated!")}>
+        Update State Message
+      </button>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <div>
+      <h1>React Combined Example</h1>
+      <Parent />
+    </div>
+  );
+}
