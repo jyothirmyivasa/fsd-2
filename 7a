@@ -1,0 +1,27 @@
+import React, { useState } from "react";
+
+export default function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  return (
+    <div>
+      <h2>Conditional Rendering Example</h2>
+
+      {loggedIn ? (
+        <div>
+          <h3>Welcome, Likki!</h3>
+          <p>You are now logged in.</p>
+        </div>
+      ) : (
+        <div>
+          <h3>Hello Guest!</h3>
+          <p>Please login to continue.</p>
+        </div>
+      )}
+
+      <button onClick={() => setLoggedIn(!loggedIn)}>
+        {loggedIn ? "Logout" : "Login"}
+      </button>
+    </div>
+  );
+}
